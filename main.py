@@ -21,8 +21,8 @@ chat = ChatOpenAI(temperature=0.5)
 
 
 @app.get("/")
-async def root():
-    return {"message": "Hack for Good! Please use a valid endpoint."}
+async def read_root():
+    return {"message": "Hello Hack for Good! Please use a valid endpoint."}
 
 
 @app.post("/tour/")
