@@ -1,0 +1,7 @@
+black
+fastapi
+uvicorn[standard]
+langchain==0.0.118
+openai
+python-dotenv
+python-multipart
