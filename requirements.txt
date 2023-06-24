@@ -1,7 +1,7 @@
 black
 fastapi
 uvicorn[standard]
-langchain==0.0.118
+langchain
 openai
 python-dotenv
 python-multipart
