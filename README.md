@@ -38,7 +38,8 @@ This is an example walking tour generator api using [LangChain](https://python.l
 8. Run the app:
 
    ```bash
-   $ flask --app app run
+   $ uvicorn main:app --reload
    ```
 
-You should now be able to access the app at [http://localhost:5000](http://localhost:5000)! For the full context behind the OpenAI API example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
+You should now be able to access the api at [http://localhost:8000](http://localhost:8000)!
+For the full context behind the OpenAI API example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).

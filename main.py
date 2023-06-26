@@ -1,4 +1,7 @@
 from fastapi import FastAPI, Form
+from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import json
 from langchain import LLMChain
@@ -13,6 +16,23 @@ from platform import python_version
 from typing import Annotated
 
 app = FastAPI()
+
+origins = [
+    "https://wander-api.onrender.com",
+    "http://localhost",
+    "https://localhost",
+    "http://localhost:3001",
+    "https://localhost:3001",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 print("Python version: ", python_version())
 load_dotenv()
@@ -44,7 +64,7 @@ async def tour(
         interests = f"""{", ".join(interests[:-1])} and {interests[-1]}"""
 
     human_template = f"""
-        I am interested in {interests}. I have {duration} hours and would like to walk no more than {distance} miles. My budget is {budget} dollars. I want to start in the {start_time}. Please give me a list of locations for a {location} walking tour based on the previous parameters. With each location, its category, a fun and detailed story about the location, a recommended time to spend at the location, and its geolocation. Format the results as a json response complete with location name, category, suggested_visit_duration, story and geolocation fields.
+        I am interested in {interests}. I have {duration} hours and would like to walk no more than {distance} miles. My budget is {budget} dollars. I want to start in the {start_time}. Please create a suggested walking tour in {location} based on the previous parameters. I would like the results formatted as valid json with each location having the following fields: location_name, category, story, suggested_visit_duration, and geolocation. The story should be fun and detailed.
         """
     print("HUMAN ASK", human_template)
     human_prompt = HumanMessagePromptTemplate.from_template(human_template)
@@ -54,12 +74,12 @@ async def tour(
     response = chain.run(
         input_language="English", output_language="English", max_tokens=100
     )
-    print(response)
 
     # check response is in json format
     try:
         json.loads(response)
-        return {response}
+        print(response)
+        return response
     except ValueError as e:
         print("Response is not in json format")
         return {"message": "Response is not in json format"}
