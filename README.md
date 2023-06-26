@@ -1,6 +1,6 @@
 # LangChain API Quickstart - Python/Flask concept api
 
-This is an example walking tour generator api using [LangChain](https://python.langchain.com/docs/get_started/introduction.html), based on the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework. Check out the tutorial or follow the instructions below to get set up.
+This is an example walking tour generator api using [LangChain](https://python.langchain.com/docs/get_started/introduction.html), built around the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [FastAPI](https://fastapi.tiangolo.com/) web framework. Check out the tutorial or follow the instructions below to get set up.
 
 ## Setup
 
