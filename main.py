@@ -78,9 +78,10 @@ async def tour(
 
     # check response is in json format
     try:
-        json.loads(response)
-        print(response)
-        return response
-    except ValueError as e:
-        print("Response is not in json format")
+        # Load JSON string
+        data = json.loads(response)
+        print(data)
+        return data
+    except json.JSONDecodeError as e:
+        print("Response is not in json format", e)
         return {"message": "Response is not in json format"}
