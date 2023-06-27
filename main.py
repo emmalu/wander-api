@@ -59,9 +59,10 @@ async def tour(
         """
     system_prompt = SystemMessagePromptTemplate.from_template(chat_prompt)
 
-    interests = interests.split(", ")
-    if len(interests) > 1:
-        interests = f"""{", ".join(interests[:-1])} and {interests[-1]}"""
+    # check if interests has multiple interests
+    if "," in interests:
+        interest_list = interests.split(", ")
+        interests = f"""{", ".join(interest_list[:-1])} and {interest_list[-1]}"""
 
     human_template = f"""
         I am interested in {interests}. I have {duration} hours and would like to walk no more than {distance} miles. My budget is {budget} dollars. I want to start in the {start_time}. Please create a suggested walking tour in {location} based on the previous parameters. I would like the results formatted as valid json with each location having the following fields: location_name, category, story, suggested_visit_duration, and geolocation. The story should be fun and detailed.
