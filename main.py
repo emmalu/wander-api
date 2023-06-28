@@ -60,7 +60,7 @@ async def tour(
     system_prompt = SystemMessagePromptTemplate.from_template(chat_prompt)
 
     human_template = f"""
-        I am interested in {interests}. I have {duration} hours and would like to walk no more than {distance} miles. My budget is {budget} dollars. I want to start in the {start_time}. Please create a suggested walking tour in {location} based on the previous parameters. I would like the results formatted as valid json with each location having the following fields: location_name, category, story, suggested_visit_duration, and geolocation. The story should be fun and detailed.
+        I am interested in {interests}. I have {duration} hours and would like to walk no more than {distance} miles. My budget is {budget} dollars. I want to start in the {start_time}. Please create a suggested walking tour in {location} based on the previous parameters. I would like the results formatted as valid json with each location having the following properties: location_name, category, story, suggested_visit_duration, and geolocation. geolocation should be an object with latitude and longitude properties. Latitude and Longitude should be in number format only. The story should be fun and detailed.
         """
     print("HUMAN ASK", human_template)
     human_prompt = HumanMessagePromptTemplate.from_template(human_template)
